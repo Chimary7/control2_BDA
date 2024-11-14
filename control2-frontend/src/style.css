@@ -25,9 +25,10 @@ a:hover {
 body {
   margin: 0;
   display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
 }
 
 h1 {
@@ -59,10 +60,10 @@ button:focus-visible {
 }
 
 #app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
   text-align: center;
+  height: 100vh; /* Ocupa todo el alto de la ventana */
+  width: 100%;    /* Ocupa todo el ancho de la ventana */
+  box-sizing: border-box;
 }
 
 @media (prefers-color-scheme: light) {
