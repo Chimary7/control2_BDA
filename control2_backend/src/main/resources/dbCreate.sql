@@ -10,10 +10,5 @@ CREATE TABLE IF NOT EXISTS tarea (
     nombre VARCHAR(50),
     descripcion VARCHAR(100),
     fecha_vencimiento TIMESTAMP,
-    estado BOOLEAN
-    );
-
-CREATE TABLE IF NOT EXISTS alerta (
-                                      id_alerta SERIAL PRIMARY KEY,
-                                      id_tarea INTEGER REFERENCES tarea(id_tarea)
+    estado Varchar(20)
     );

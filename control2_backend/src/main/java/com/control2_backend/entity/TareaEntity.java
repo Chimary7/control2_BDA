@@ -8,7 +8,7 @@ public class TareaEntity {
     private String nombre;
     private String descripcion;
     private Timestamp fecha_vencimiento;
-    private Boolean estado;
+    private String estado;
 
     public Long getId_tarea() {
         return id_tarea;
@@ -50,11 +50,11 @@ public class TareaEntity {
         this.fecha_vencimiento = fecha_vencimiento;
     }
 
-    public Boolean getEstado() {
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(Boolean estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
 }
