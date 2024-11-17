@@ -8,7 +8,7 @@ import EditHomeWork from "./components/client/componentClient/EditHomeWork.vue";
 
 const routes = [
     {
-        path: '/', redirect : '/login'
+        path: '/', redirect : '/register'
     },
     {
         path: '/login',

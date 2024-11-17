@@ -1,15 +1,14 @@
 <script setup>
 import { ref } from 'vue'
   const name = ref('')
-  const email = ref('')
+  const surname = ref('')
+  const nombre = ref('')
   const password = ref('')
-  const telefono = ref('')
-  const direccion = ref('')
   const password2 = ref('')
   const register = async () => {
     try {
       console.log('register')
-      if(name.value === '' || email.value === '' || password.value === '' || telefono.value === '' || direccion.value === ''){
+      if(name.value === '' || surname.value === '' || password.value === '' || password2.value === ''){
         alert('Todos los campos son obligatorios')
         return
       }
@@ -22,11 +21,8 @@ import { ref } from 'vue'
         return
       }
       const data = {
-        name: name.value,
-        email: email.value,
-        password: password.value,
-        telefono: telefono.value,
-        direccion: direccion.value,
+        nombre: `${name.value} ${surname.value}`,
+        clave: password.value
       }
       console.log(data)
       /*
@@ -53,22 +49,12 @@ import { ref } from 'vue'
       <form @submit.prevent="register">
         <div class="fila">
           <div class="form-group">
-            <label class="label" for="name">Name</label>
-            <input type="text" v-model="name" class="form-control" id="name" placeholder="Ej: Juan Torres" @input="name = name.replace(/\d/g, '')">
+            <label class="label" for="name">Nombre</label>
+            <input type="text" v-model="name" class="form-control" id="name" placeholder="Ej: Juan" @input="name = name.replace(/\d/g, '')">
           </div>
           <div class="form-group">
-            <label class="label" for="email">Email address</label>
-            <input type="email" v-model="email" class="form-control" id="email" placeholder="Ej: ejemplo@dominio.com">
-          </div>
-        </div>
-        <div class="fila">
-          <div class="form-group">
-            <label class="label" for="direccion">Dirección</label>
-            <input type="text" v-model="direccion" class="form-control" id="direccion" placeholder="Ej: Los Manzanos 520">
-          </div>
-          <div class="form-group">
-            <label class="label" for="telefono">Teléfono</label>
-            <input type="tel" v-model="telefono" class="form-control" id="telefono" placeholder="Ej: 955663322" @input="telefono = telefono.replace(/\D/g, '')">
+            <label class="label" for="email">Apellido</label>
+            <input type="text" v-model="surname" class="form-control" id="surname" placeholder="Ej: Torres" @input="name = name.replace(/\d/g, '')">
           </div>
         </div>
         <div class="fila">
@@ -142,18 +128,18 @@ import { ref } from 'vue'
   margin-right: 10px;
 }
 .btn-btn-primary{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 80%;
-    height: 2rem;
-    margin: 1rem;
-    padding: 1rem;
-    font-size: 1rem;
-    background-color: white;
-    color: rgb(45, 44, 44);
-    border-radius: 0.5rem;
-    border: solid 1px #9216a8;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  height: 2rem;
+  margin: 1rem auto; /* Center horizontally */
+  padding: 1rem;
+  font-size: 1rem;
+  background-color: #9216a8;
+  color: white;
+  border-radius: 0.5rem;
+  border: solid 1px #9216a8;
 }
 </style>
