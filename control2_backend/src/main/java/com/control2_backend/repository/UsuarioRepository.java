@@ -41,6 +41,15 @@ public class UsuarioRepository {
         }
     }
 
+    public UsuarioEntity findByName(String nombre){
+        String sql = "SELECT id_usuario, nombre, clave FROM usuario WHERE nombre = :nombre";
+        try (Connection con = sql2o.open()){
+            return con.createQuery(sql)
+                    .addParameter("nombre", nombre)
+                    .executeAndFetchFirst(UsuarioEntity.class);
+        }
+    }
+
     public void deleteById(Long id) {
         String sql = "DELETE FROM usuario WHERE id_usuario = :id";
         try (Connection con = sql2o.open()) {

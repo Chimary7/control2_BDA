@@ -22,7 +22,7 @@ public class UsuarioService {
     public ResponseEntity<Object> addUsuario(UsuarioEntity cliente) {
         try {
             usuarioRepository.save(cliente);
-            return new ResponseEntity<>("Se ingresó correctamente la categoría", HttpStatus.CREATED);
+            return new ResponseEntity<>("Se ingresó correctamente el usuario", HttpStatus.CREATED);
         } catch (Exception e) {
             // Manejo del error
             return new ResponseEntity<>("Error al ingresar la categoría: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
