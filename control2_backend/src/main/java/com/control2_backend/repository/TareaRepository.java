@@ -51,5 +51,31 @@ public class TareaRepository {
                     .executeUpdate();
         }
     }
+
+    public List<TareaEntity> findByEstadoAndKeyword(String estado, String keyword) {
+        StringBuilder sql = new StringBuilder("SELECT id_tarea, id_usuario, nombre, descripcion, fecha_vencimiento, estado FROM tarea WHERE 1=1");
+
+        if (estado != null && !estado.isEmpty()) {
+            sql.append(" AND estado = :estado");
+        }
+
+        if (keyword != null && !keyword.isEmpty()) {
+            sql.append(" AND (LOWER(nombre) LIKE :keyword OR LOWER(descripcion) LIKE :keyword)");
+        }
+
+        try (Connection con = sql2o.open()) {
+            var query = con.createQuery(sql.toString());
+
+            if (estado != null && !estado.isEmpty()) {
+                query.addParameter("estado", estado);
+            }
+
+            if (keyword != null && !keyword.isEmpty()) {
+                query.addParameter("keyword", "%" + keyword.toLowerCase() + "%");
+            }
+
+            return query.executeAndFetch(TareaEntity.class);
+        }
+    }
 }
 
