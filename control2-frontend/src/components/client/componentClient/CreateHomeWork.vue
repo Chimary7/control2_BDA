@@ -6,6 +6,10 @@ const dia = ref('')
 const nombre = ref('')
 const descripcion = ref('')
 
+const volver = () => {
+  console.log('volver')
+  router.push({ name: 'Home' })
+}
 const crearTarea = async () => {
   try {
     console.log('crearTarea')
@@ -87,7 +91,11 @@ const crearTarea = async () => {
         <label class="label" for="descripcion">Descripcion</label>
         <textarea class="text" v-model="descripcion" id="descripcion" placeholder="Estudiar Derivadas parciales en conjunto con direccionales"/>
       </div>
-      <button @click="crearTarea" style="margin-top: 10px; background: #9216a8">Crear Tarea</button>
+      <div>
+        <button @click="volver" style="margin-top: 10px; background: #9216a8; width: 130px;">Volver</button>
+        <button @click="crearTarea" style="margin-top: 10px; background: #9216a8; margin-left: 5px;">Crear Tarea</button>
+      </div>
+
     </div>
   </div>
 </template>
