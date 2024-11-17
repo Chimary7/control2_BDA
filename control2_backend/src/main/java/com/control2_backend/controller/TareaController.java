@@ -31,6 +31,11 @@ public class TareaController {
         return entity != null ? ResponseEntity.ok(entity) : ResponseEntity.notFound().build();
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> actualizarEstadoTareaToFinalizada(@PathVariable long id) {
+        return service.updateTareaToFinalizada(id);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> delete(@PathVariable Long id) {
         return service.deleteTarea(id);
