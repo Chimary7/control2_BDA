@@ -3,6 +3,8 @@ import Register from './components/register.vue';
 import Login from './components/login.vue';
 import Home from './components/client/Home.vue';
 import Homeworks from './components/client/componentClient/Homeworks.vue';
+import CreateHomeWork from "./components/client/componentClient/CreateHomeWork.vue";
+import EditHomeWork from "./components/client/componentClient/EditHomeWork.vue";
 
 const routes = [
     {
@@ -29,6 +31,16 @@ const routes = [
                 component: Homeworks
             }
         ]
+    },
+    {
+        path: '/CreateHomework',
+        name : 'CreateHomework',
+        component: CreateHomeWork
+    },
+    {
+        path: '/EditHomework',
+        name : 'EditHomework',
+        component: EditHomeWork
     }
 ];
 
