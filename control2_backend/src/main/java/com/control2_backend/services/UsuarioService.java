@@ -1,5 +1,6 @@
 package com.control2_backend.services;
 
+import com.control2_backend.entity.TareaEntity;
 import com.control2_backend.entity.UsuarioEntity;
 import com.control2_backend.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,5 +44,9 @@ public class UsuarioService {
             return new ResponseEntity<>("Se elimino correctamente la Categoria", HttpStatus.CREATED);
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    public List<TareaEntity> getTareasPorVencer(long id) {
+        return usuarioRepository.verificarTareasPorVencer(id);
     }
 }
