@@ -29,18 +29,18 @@ const routes = [
                 path: 'homework',
                 name : 'homework',
                 component: Homeworks
+            },
+            {
+                path: 'CreateHomework',
+                name : 'CreateHomework',
+                component: CreateHomeWork
+            },
+            {
+                path: 'EditHomework',
+                name : 'EditHomework',
+                component: EditHomeWork
             }
         ]
-    },
-    {
-        path: '/CreateHomework',
-        name : 'CreateHomework',
-        component: CreateHomeWork
-    },
-    {
-        path: '/EditHomework',
-        name : 'EditHomework',
-        component: EditHomeWork
     }
 ];
 

@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import router from "../../../router.js";
+import TaskService from '../../../Services/TaskService.js'
 const anio = ref('')
 const mes = ref('')
 const dia = ref('')
@@ -48,15 +49,13 @@ const crearTarea = async () => {
     }
     console.log(data)
     /*
-    const response = await fetch('http://localhost:3000/api/crearTarea', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    })
-    const res = await response.json()
-    console.log(res)
+    const response = await TaskService.createTask(data);
+    if(response.status === 201){
+      alert('Tarea creada correctamente')
+      router.push({ name: 'homework' })
+    }else{
+      alert('Error al crear la tarea')
+    }
     */
   } catch (error) {
     console.log(error)

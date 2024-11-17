@@ -21,17 +21,17 @@ onMounted(() => {
 }, [])
 const volver = () => {
   console.log('volver')
-  //router.push({ name: 'Home' })
+  //router.push({ name: 'Homework' })
 }
 
 const eliminar = () => {
   console.log('delete')
   //Logica para borrar la tarea
-  //router.push({ name: 'Home' })
+  //router.push({ name: 'Homework' })
 }
 const EditarTarea = async () => {
   try {
-    console.log('crearTarea')
+    console.log('EditarTarea')
     if(nombre.value === '' || descripcion.value === '' || anio.value === '' || mes.value === '' || dia.value === ''){
       alert('Todos los campos son obligatorios')
       return

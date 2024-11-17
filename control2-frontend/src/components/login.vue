@@ -2,7 +2,7 @@
     <div class="fondo-login">
         <div class="contenedor-login">
                 <div class="div-login-form">
-                    <form action="">
+                    <form @Submit.prevent="login">
                         <h1>Inicia sesión</h1>
                         <div class="div-inputs-login">
                             <label>Email</label>
