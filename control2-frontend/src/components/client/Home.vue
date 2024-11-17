@@ -7,7 +7,7 @@ import Navbar from './componentClient/Navbar.vue';
 <div class="fondo-home">
     <Navbar />
     <div class="content">
-        
+        <router-view />
     </div>
 </div>
 
