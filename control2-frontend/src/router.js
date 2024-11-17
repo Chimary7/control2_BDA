@@ -3,10 +3,11 @@ import Register from './components/register.vue';
 import Login from './components/login.vue';
 import Home from './components/client/Home.vue';
 import Homeworks from './components/client/componentClient/Homeworks.vue';
+import CreateHomeWork from "./components/client/componentClient/CreateHomeWork.vue";
 
 const routes = [
     {
-        path: '/', redirect : '/login'
+        path: '/', redirect : '/CreateHomework'
     },
     {
         path: '/login',
@@ -29,6 +30,11 @@ const routes = [
                 component: Homeworks
             }
         ]
+    },
+    {
+        path: '/CreateHomework',
+        name : 'CreateHomework',
+        component: CreateHomeWork,
     }
 ];
 
