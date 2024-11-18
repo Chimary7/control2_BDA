@@ -30,6 +30,7 @@ public class authenticationController {
         String token = Response.getToken();
         String cookieValue = "JWT=" + token + "; HttpOnly; Secure; SameSite=None; Path=/; Max-Age=" + (60 * 60 * 24);
         HashMap<String, Integer> message = new HashMap<>();
+        response.addHeader("Set-Cookie", cookieValue);
         message.put("id_user", Response.getIdUser());
         return new ResponseEntity<>(message, HttpStatus.OK);
     }

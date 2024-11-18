@@ -69,7 +69,7 @@ public class TareaService {
 
     public ResponseEntity<Object> deleteTarea(long id) {
         TareaEntity optionalTarea = tareaRepository.findById(id);
-        if (optionalTarea != null){
+        if (optionalTarea != null) {
             this.tareaRepository.deleteById(id);
             return new ResponseEntity<>("Se elimino correctamente la Categoria", HttpStatus.CREATED);
         }
