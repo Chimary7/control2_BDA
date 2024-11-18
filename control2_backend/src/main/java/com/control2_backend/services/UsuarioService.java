@@ -49,4 +49,12 @@ public class UsuarioService {
     public List<TareaEntity> getTareasPorVencer(long id) {
         return usuarioRepository.verificarTareasPorVencer(id);
     }
+
+    public List<TareaEntity> getTareasByUsuarioId(Long idUsuario) {
+        return usuarioRepository.findTareasByUsuarioId(idUsuario);
+    }
+
+    public List<TareaEntity> getTareasCaducadasByUsuarioId(Long idUsuario) {
+        return usuarioRepository.findCaducadasByUsuarioId(idUsuario);
+    }
 }
