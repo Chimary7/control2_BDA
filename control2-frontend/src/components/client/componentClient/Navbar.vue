@@ -6,12 +6,12 @@
                 <p>username</p>
             </div>
             <nav>
-                <router-link to="/home">
+                <router-link :to="{ name: 'homework' }">
                     <div class="btn-nav">
                         lista de tareas
                     </div>
                 </router-link>
-                <router-link to="/home">
+                <router-link :to="{ name: 'CreateHomework' }">
                     <div class="btn-nav">
                         crear tarea
                     </div>
