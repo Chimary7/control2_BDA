@@ -33,8 +33,14 @@ public class TareaController {
 
     @GetMapping("/busquedaTareas")
     public ResponseEntity<List<TareaEntity>> searchTareas(@RequestParam(required = false) String estado,
-            @RequestParam(required = false) String keyword) {
+                                                          @RequestParam(required = false) String keyword) {
+
         List<TareaEntity> tareas = service.searchTareas(estado, keyword);
+
+        if (tareas.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
         return ResponseEntity.ok(tareas);
     }
 

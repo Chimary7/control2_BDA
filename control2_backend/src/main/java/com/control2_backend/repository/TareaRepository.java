@@ -74,7 +74,9 @@ public class TareaRepository {
                 query.addParameter("keyword", "%" + keyword.toLowerCase() + "%");
             }
 
-            return query.executeAndFetch(TareaEntity.class);
+            List<TareaEntity> tareas = query.executeAndFetch(TareaEntity.class);
+
+            return tareas;
         }
     }
 }
