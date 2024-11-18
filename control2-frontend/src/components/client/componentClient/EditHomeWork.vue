@@ -1,85 +1,86 @@
 <script setup>
-import {onMounted, ref} from 'vue'
-import router from "../../../router.js";
-const anio = ref('')
-const mes = ref('')
-const dia = ref('')
-const nombre = ref('')
-const descripcion = ref('')
+  import {onMounted, ref} from 'vue'
+  import {useRouter} from 'vue-router';
+  import {updateTask} from "../../../Services/TaskService.js";
+  import {deleteTask} from "../../../Services/TaskService.js";
+
+  const router = useRouter();
+  const anio = ref('')
+  const mes = ref('')
+  const dia = ref('')
+  const nombre = ref('')
+  const descripcion = ref('')
+  const idTarea = ref('')
 
 
-onMounted(() => {
-  /*
-  * Logica para traer la tarea a editar
-  * */
-  //const fecha = tarea.fecha.split('-')
-  //anio.value = fecha[0]
-  //mes.value = fecha[1]
-  //dia.value = fecha[2]
-  //nombre.value = tarea.nombre
-  //descripcion.value = tarea.descripcion
-}, [])
-const volver = () => {
-  console.log('volver')
-  //router.push({ name: 'Homework' })
-}
+  onMounted(() => {
+    // Se obtiene la tarea a editar
+    const tarea = TaskService.getTaskById();
+    const fecha = tarea.fecha.split('-')
+    anio.value = fecha[0]
+    mes.value = fecha[1]
+    dia.value = fecha[2]
+    nombre.value = tarea.nombre
+    descripcion.value = tarea.descripcion
+    idTarea.value = tarea.id
+  }, [])
 
-const eliminar = () => {
-  console.log('delete')
-  //Logica para borrar la tarea
-  //router.push({ name: 'Homework' })
-}
-const EditarTarea = async () => {
-  try {
-    console.log('EditarTarea')
-    if(nombre.value === '' || descripcion.value === '' || anio.value === '' || mes.value === '' || dia.value === ''){
-      alert('Todos los campos son obligatorios')
-      return
-    }
-    console.log(anio.value<20)
-    console.log(anio.value.length)
-    if(anio.value.length !== 4 && anio.value<1900 && anio.value>2024){
-      alert('El año debe estar dentro de rango')
-      return
-    }
-    if(mes.value.length !== 2 && mes.value>0 && mes.value>13){
-      alert('El mes debe estar dentro de rango')
-      return
-    }
-    if(dia.value.length !== 2 && dia.value<0 && dia.value>31){
-      alert('El dia debe estar dentro de rango')
-      return
-    }
-    if(mes.value < 1 || mes.value > 12){
-      alert('El mes debe estar dentro de rango')
-      return
-    }
-    if(dia.value < 1 || dia.value > 31){
-      alert('El dia debe estar entre 1 y 31')
-      return
-    }
-    const data = {
-      nombre: nombre.value,
-      descripcion: descripcion.value,
-      fecha: `${anio.value}-${mes.value}-${dia.value}`,
-      estado: false,
-    }
-    console.log(data)
-    /*
-    const response = await fetch('http://localhost:3000/api/crearTarea', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    })
-    const res = await response.json()
-    console.log(res)
-    */
-  } catch (error) {
-    console.log(error)
+  const volver = () => {
+    console.log('volver')
+    router.push({ name: 'homework' })
   }
-}
+
+  const eliminar = () => {
+    console.log('eliminar')
+    const response = deleteTask(idTarea.value);
+    if (response.status === 201) {
+      console.log('Tarea eliminada correctamente')
+      router.push({ name: 'homework' })
+    } else {
+      alert('Error al eliminar la tarea')
+    }
+    router.push({ name: 'homework' })
+  }
+
+  const EditarTarea = async () => {
+      // Se valida que los campos no estén vacíos
+      if(nombre.value === '' || descripcion.value === '' || anio.value === '' || mes.value === '' || dia.value === ''){
+        alert('Todos los campos son obligatorios')
+        return
+      }
+
+      // Se valida que la fecha sea válida
+      if(anio.value.length !== 4 && anio.value<1900 && anio.value>2024){
+        alert('El año debe estar dentro de rango')
+        return
+      }
+      if(mes.value.length !== 2 && mes.value>0 && mes.value>13){
+        alert('El mes debe estar dentro de rango')
+        return
+      }
+      if(dia.value.length !== 2 && dia.value<0 && dia.value>31){
+        alert('El dia debe estar dentro de rango')
+        return
+      }
+
+      // Se valida que el mes y el día sean válidos
+      const data = {
+        nombre: nombre.value,
+        descripcion: descripcion.value,
+        fecha: `${anio.value}-${mes.value}-${dia.value}`,
+        estado: false,
+      }
+      console.log(data)
+
+      // Se hace la petición PUT al servidor
+      const response = await updateTask(data)
+      if (response.status === 201) {
+        console.log('Tarea editada correctamente')
+        router.push({ name: 'homework' })
+      } else {
+        alert('Error al editar la tarea')
+      }
+  }
 </script>
 
 <template>

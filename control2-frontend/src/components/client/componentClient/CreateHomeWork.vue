@@ -1,66 +1,64 @@
 <script setup>
-import { ref } from 'vue'
-import router from "../../../router.js";
-import TaskService from '../../../Services/TaskService.js'
-const anio = ref('')
-const mes = ref('')
-const dia = ref('')
-const nombre = ref('')
-const descripcion = ref('')
+  import { ref } from 'vue'
+  import {useRouter} from 'vue-router';
+  import {createTask} from "../../../Services/TaskService.js";
 
-const volver = () => {
-  console.log('volver')
-  //router.push({ name: 'Home' })
-}
-const crearTarea = async () => {
-  try {
-    console.log('crearTarea')
-    if(nombre.value === '' || descripcion.value === '' || anio.value === '' || mes.value === '' || dia.value === ''){
-      alert('Todos los campos son obligatorios')
-      return
-    }
-    console.log(anio.value<20)
-    console.log(anio.value.length)
-    if(anio.value.length !== 4 && anio.value<1900 && anio.value>2024){
-      alert('El año debe estar dentro de rango')
-      return
-    }
-    if(mes.value.length !== 2 && mes.value>0 && mes.value>13){
-      alert('El mes debe estar dentro de rango')
-      return
-    }
-    if(dia.value.length !== 2 && dia.value<0 && dia.value>31){
-      alert('El dia debe estar dentro de rango')
-      return
-    }
-    if(mes.value < 1 || mes.value > 12){
-      alert('El mes debe estar dentro de rango')
-      return
-    }
-    if(dia.value < 1 || dia.value > 31){
-      alert('El dia debe estar entre 1 y 31')
-      return
-    }
-    const data = {
-      nombre: nombre.value,
-      descripcion: descripcion.value,
-      fecha: `${anio.value}-${mes.value}-${dia.value}`,
-      estado: false,
-    }
-    console.log(data)
-    /*
-    const response = await TaskService.createTask(data);
-    if(response.status === 201){
-      alert('Tarea creada correctamente')
-      router.push({ name: 'homework' })
-    }else{
-      alert('Error al crear la tarea')
-    }
-    */
-  } catch (error) {
-    console.log(error)
+  const router = useRouter();
+  const anio = ref('')
+  const mes = ref('')
+  const dia = ref('')
+  const nombre = ref('')
+  const descripcion = ref('')
+
+  const volver = () => {
+    console.log('volver')
+    router.push({ name: 'homework' })
   }
-}
+  const crearTarea = async () => {
+      console.log('crearTarea')
+      if(nombre.value === '' || descripcion.value === '' || anio.value === '' || mes.value === '' || dia.value === ''){
+        alert('Todos los campos son obligatorios')
+        return
+      }
+      console.log(anio.value<20)
+      console.log(anio.value.length)
+      if(anio.value.length !== 4 && anio.value<1900 && anio.value>2024){
+        alert('El año debe estar dentro de rango')
+        return
+      }
+      if(mes.value.length !== 2 && mes.value>0 && mes.value>13){
+        alert('El mes debe estar dentro de rango')
+        return
+      }
+      if(dia.value.length !== 2 && dia.value<0 && dia.value>31){
+        alert('El dia debe estar dentro de rango')
+        return
+      }
+      if(mes.value < 1 || mes.value > 12){
+        alert('El mes debe estar dentro de rango')
+        return
+      }
+      if(dia.value < 1 || dia.value > 31){
+        alert('El dia debe estar entre 1 y 31')
+        return
+      }
+      const data = {
+        nombre: nombre.value,
+        descripcion: descripcion.value,
+        fecha: `${anio.value}-${mes.value}-${dia.value}`,
+        estado: false,
+      }
+      console.log(data)
+
+      // Se hace la petición POST al servidor
+      const response = await createTask(data)
+      if (response.status === 201) {
+        console.log('Tarea creada correctamente')
+        router.push({ name: 'homework' })
+      } else {
+        alert('Error al crear la tarea')
+      }
+  }
 
 </script>
 
