@@ -40,12 +40,11 @@ public class TareaService {
         try {
             TareaEntity tarea = tareaRepository.findById(id);
             if (tarea != null) {
-                if(tarea.getEstado().equals("Pendiente")){
+                if (tarea.getEstado().equals("Pendiente")) {
                     tarea.setEstado("Completada");
                     tareaRepository.save(tarea); // Guardar los cambios
                     return new ResponseEntity<>("Estado de la tarea actualizado a completada", HttpStatus.OK);
-                }
-                else{
+                } else {
                     return new ResponseEntity<>("La tarea ya se encuentra completada", HttpStatus.BAD_REQUEST);
                 }
 
@@ -59,7 +58,7 @@ public class TareaService {
 
     public ResponseEntity<Object> deleteTarea(long id) {
         TareaEntity optionalTarea = tareaRepository.findById(id);
-        if (optionalTarea != null){
+        if (optionalTarea != null) {
             this.tareaRepository.deleteById(id);
             return new ResponseEntity<>("Se elimino correctamente la Categoria", HttpStatus.CREATED);
         }

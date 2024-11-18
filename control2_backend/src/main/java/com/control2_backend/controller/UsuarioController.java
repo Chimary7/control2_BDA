@@ -39,4 +39,14 @@ public class UsuarioController {
 
     @GetMapping("/tareas/{id}")
     public List<TareaEntity> tareasPorVencer(@PathVariable Long id){return service.getTareasPorVencer(id);}
+
+    @GetMapping("/{idUsuario}/tareas")
+    public List<TareaEntity> getTareasByUsuarioId(@PathVariable Long idUsuario) {
+        return service.getTareasByUsuarioId(idUsuario);
+    }
+
+    @GetMapping("/{idUsuario}/caducadas")
+    public List<TareaEntity> getTareasCaducadasByUsuarioId(@PathVariable Long idUsuario) {
+        return service.getTareasCaducadasByUsuarioId(idUsuario);
+    }
 }
