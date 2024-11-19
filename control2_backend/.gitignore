@@ -31,3 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### application.properties y Sql2oConfig ###
+./src/main/resources/application.properties
+./src/main/java/com/control2_backend/config/Sql2oConfig

@@ -25,10 +25,10 @@ public class TareaService {
     public ResponseEntity<Object> addTarea(TareaEntity tarea) {
         try {
             tareaRepository.save(tarea);
-            return new ResponseEntity<>("Se ingresó correctamente la categoría", HttpStatus.CREATED);
+            return new ResponseEntity<>("Se ingresó correctamente la tarea", HttpStatus.CREATED);
         } catch (Exception e) {
             // Manejo del error
-            return new ResponseEntity<>("Error al ingresar la categoría: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Error al ingresar la tarea: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

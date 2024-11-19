@@ -27,12 +27,12 @@ BEGIN
 UPDATE tarea t1
 SET estado = 'vencido'
 WHERE t1.id_usuario = usuario_id
-  AND t1.estado IN ('pendiente', 'proximo_a_vencer')
+  AND t1.estado IN ('pendiente', 'próximo a vencer')
   AND t1.fecha_vencimiento <= CURRENT_TIMESTAMP;
 
 -- Actualizar el estado de las tareas próximas a vencer
 UPDATE tarea t2
-SET estado = 'proximo_a_vencer'
+SET estado = 'próximo a vencer'
 WHERE t2.id_usuario = usuario_id
   AND t2.estado = 'pendiente'
   AND t2.fecha_vencimiento <= (CURRENT_TIMESTAMP + INTERVAL '24 hours')
@@ -50,7 +50,7 @@ SELECT
 FROM tarea t3
 WHERE t3.id_usuario = usuario_id
   AND t3.estado = 'proximo_a_vencer'
-ORDER BY t3.fecha_vencimiento ASC;
+ORDER BY t3.fecha_vencimiento;
 END;
 $BODY$
 LANGUAGE plpgsql;
