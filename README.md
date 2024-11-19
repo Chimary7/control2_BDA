@@ -38,6 +38,8 @@ public class SecurityConfig {
         return http.build();
     }
 }
+```
+
 Este cambio es necesario debido al uso de cookies dentro del código.
 —------------------------------------------------------------------------------------------------------------------------------------
 
