@@ -5,11 +5,11 @@
                     <form @Submit.prevent="login">
                         <h1>Inicia sesión</h1>
                         <div class="div-inputs-login">
-                            <label>Email</label>
-                            <input type="email" placeholder="Ej: email@gmail.com" required>
+                            <label>Name</label>
+                            <input type="text" placeholder="Ej:Nombre Apellido" required>
                             <label>Password</label>
                             <input type="password" placeholder="Contraseña" required>
-                            <p>¿No estas registrado? <router-link to="/register">Registrate</Router-link></p>
+                            <p>¿No estas registrado? <router-link to="/register">Registrate</router-link></p>
                         </div>
                         <div class="div-button-login">
                             <button type="submit">Iniciar sesión</button>
@@ -21,7 +21,28 @@
 </template>
 
 <script setup>
+import { ref } from 'vue';
+import { Login } from '../Services/UserService';
+import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
 
+const store = useStore();
+const router = useRouter();
+const data = ref({ name: '', password: '' });
+
+const login = async () => {
+    const response = await Login(data.value);
+    console.log('Response:', response);
+    if (response.status === 200) {
+        alert('Sesión iniciada correctamente');
+        store.commit('setUser', response.data);
+        store.commit('login')
+        router.push({ name: 'homework' });
+
+    } else {
+        alert('Error al iniciar sesión');
+    }
+};
 </script>
 
 <style scoped>

@@ -1,44 +1,50 @@
 <script setup>
-import { ref } from 'vue'
+  import { ref } from 'vue'
+  import {createClient} from "../Services/UserService.js"
+  import { useRouter } from 'vue-router'
+
+  const router = useRouter()
   const name = ref('')
   const surname = ref('')
   const nombre = ref('')
   const password = ref('')
   const password2 = ref('')
+
   const register = async () => {
-    try {
+
+      // Se valida que los campos no estén vacíos
       console.log('register')
       if(name.value === '' || surname.value === '' || password.value === '' || password2.value === ''){
         alert('Todos los campos son obligatorios')
         return
       }
+      // Se valida que las contraseñas coincidan
       if(password2.value !== password.value){
         alert('Las contraseñas no coinciden')
         return
       }
+
+      // Se valida que la contraseña tenga al menos 4 caracteres
       if(password.value.length < 4){
         alert('La contraseña debe tener al menos 4 caracteres')
         return
       }
+
+      // Se crea el objeto data con los datos del formulario
       const data = {
         nombre: `${name.value} ${surname.value}`,
         clave: password.value
       }
       console.log(data)
-      /*
-      const response = await fetch('http://localhost:3000/api/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      })
-      const res = await response.json()
-      console.log(res)
-      */
-    } catch (error) {
-      console.log(error)
-    }
+
+      // Se hace la petición POST al servidor
+      const response = await createClient(data)
+      if (response.status === 201) {
+        console.log('Usuario creado correctamente')
+        router.push({ name: 'login' })
+      } else {
+        alert('Error al crear el usuario')
+      }
   }
 </script>
 
