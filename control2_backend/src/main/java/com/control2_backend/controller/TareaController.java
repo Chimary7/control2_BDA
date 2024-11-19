@@ -45,6 +45,11 @@ public class TareaController {
     }
 
     @PutMapping("/{id}")
+    public ResponseEntity<Object> updateTarea(@PathVariable long id, @RequestBody TareaEntity updatedTarea) {
+        return service.updateTarea(id, updatedTarea);
+    }
+
+    @PutMapping("/finalizarTarea/{id}")
     public ResponseEntity<Object> actualizarEstadoTareaToFinalizada(@PathVariable long id) {
         return service.updateTareaToFinalizada(id);
     }
