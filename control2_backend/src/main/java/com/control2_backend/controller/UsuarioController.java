@@ -1,5 +1,6 @@
 package com.control2_backend.controller;
 
+import com.control2_backend.entity.TareaEntity;
 import com.control2_backend.entity.UsuarioEntity;
 import com.control2_backend.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,5 +35,18 @@ public class UsuarioController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> delete(@PathVariable Long id) {
         return service.deleteUsuario(id);
+    }
+
+    @GetMapping("/tareas/{id}")
+    public List<TareaEntity> tareasPorVencer(@PathVariable Long id){return service.getTareasPorVencer(id);}
+
+    @GetMapping("/{idUsuario}/tareas")
+    public List<TareaEntity> getTareasByUsuarioId(@PathVariable Long idUsuario) {
+        return service.getTareasByUsuarioId(idUsuario);
+    }
+
+    @GetMapping("/{idUsuario}/caducadas")
+    public List<TareaEntity> getTareasCaducadasByUsuarioId(@PathVariable Long idUsuario) {
+        return service.getTareasCaducadasByUsuarioId(idUsuario);
     }
 }

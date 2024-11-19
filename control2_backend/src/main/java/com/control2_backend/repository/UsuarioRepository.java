@@ -1,5 +1,6 @@
 package com.control2_backend.repository;
 
+import com.control2_backend.entity.TareaEntity;
 import com.control2_backend.entity.UsuarioEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -55,6 +56,34 @@ public class UsuarioRepository {
             con.createQuery(sql)
                     .addParameter("id", id)
                     .executeUpdate();
+        }
+    }
+
+
+    public List<TareaEntity> verificarTareasPorVencer(Long usuarioId) {
+        String sql = "SELECT * FROM verificar_tareas_por_vencer(:usuarioId)";
+        try (Connection con = sql2o.open()) {
+            return con.createQuery(sql)
+                    .addParameter("usuarioId", usuarioId)
+                    .executeAndFetch(TareaEntity.class);
+        }
+    }
+
+    public List<TareaEntity> findTareasByUsuarioId(Long idUsuario) {
+        String sql = "SELECT id_tarea, id_usuario, nombre, descripcion, fecha_vencimiento, estado FROM tarea WHERE id_usuario = :idUsuario";
+        try (Connection con = sql2o.open()) {
+            return con.createQuery(sql)
+                    .addParameter("idUsuario", idUsuario)
+                    .executeAndFetch(TareaEntity.class);
+        }
+    }
+
+    public List<TareaEntity> findCaducadasByUsuarioId(Long idUsuario) {
+        String sql = "SELECT id_tarea, id_usuario, nombre, descripcion, fecha_vencimiento, estado FROM tarea WHERE id_usuario = :idUsuario AND fecha_vencimiento < NOW()";
+        try (Connection con = sql2o.open()) {
+            return con.createQuery(sql)
+                    .addParameter("idUsuario", idUsuario)
+                    .executeAndFetch(TareaEntity.class);
         }
     }
 }

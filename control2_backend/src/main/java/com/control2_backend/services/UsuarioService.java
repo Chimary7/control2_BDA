@@ -1,5 +1,6 @@
 package com.control2_backend.services;
 
+import com.control2_backend.entity.TareaEntity;
 import com.control2_backend.entity.UsuarioEntity;
 import com.control2_backend.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ public class UsuarioService {
             return new ResponseEntity<>("Se ingresó correctamente el usuario", HttpStatus.CREATED);
         } catch (Exception e) {
             // Manejo del error
-            return new ResponseEntity<>("Error al ingresar la categoría: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Error al ingresar el usuario: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -43,5 +44,17 @@ public class UsuarioService {
             return new ResponseEntity<>("Se elimino correctamente la Categoria", HttpStatus.CREATED);
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    public List<TareaEntity> getTareasPorVencer(long id) {
+        return usuarioRepository.verificarTareasPorVencer(id);
+    }
+
+    public List<TareaEntity> getTareasByUsuarioId(Long idUsuario) {
+        return usuarioRepository.findTareasByUsuarioId(idUsuario);
+    }
+
+    public List<TareaEntity> getTareasCaducadasByUsuarioId(Long idUsuario) {
+        return usuarioRepository.findCaducadasByUsuarioId(idUsuario);
     }
 }

@@ -31,6 +31,24 @@ public class TareaController {
         return entity != null ? ResponseEntity.ok(entity) : ResponseEntity.notFound().build();
     }
 
+    @GetMapping("/busquedaTareas")
+    public ResponseEntity<List<TareaEntity>> searchTareas(@RequestParam(required = false) String estado,
+                                                          @RequestParam(required = false) String keyword) {
+
+        List<TareaEntity> tareas = service.searchTareas(estado, keyword);
+
+        if (tareas.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(tareas);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> actualizarEstadoTareaToFinalizada(@PathVariable long id) {
+        return service.updateTareaToFinalizada(id);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> delete(@PathVariable Long id) {
         return service.deleteTarea(id);
