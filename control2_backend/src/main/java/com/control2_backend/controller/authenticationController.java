@@ -4,6 +4,7 @@ import com.control2_backend.dto.login;
 import com.control2_backend.dto.loginResponse;
 import com.control2_backend.entity.UsuarioEntity;
 import com.control2_backend.services.AuthenticationService;
+import com.control2_backend.services.UsuarioService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -24,6 +25,9 @@ public class authenticationController {
     @Autowired
     AuthenticationService authenticationService;
 
+    @Autowired
+    UsuarioService usuarioService;
+
     @PostMapping("/login")
     public ResponseEntity<Map<String,Integer>> login(@RequestBody login log, HttpServletResponse response){
         loginResponse Response = authenticationService.login(log);
@@ -32,6 +36,7 @@ public class authenticationController {
         HashMap<String, Integer> message = new HashMap<>();
         response.addHeader("Set-Cookie", cookieValue);
         message.put("id_user", Response.getIdUser());
+        usuarioService.getTareasPorVencer(Response.getIdUser());
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
 

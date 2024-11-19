@@ -25,7 +25,7 @@ public class UsuarioService {
             return new ResponseEntity<>("Se ingresó correctamente el usuario", HttpStatus.CREATED);
         } catch (Exception e) {
             // Manejo del error
-            return new ResponseEntity<>("Error al ingresar la categoría: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Error al ingresar el usuario: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
