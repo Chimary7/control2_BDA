@@ -42,7 +42,7 @@
         return
       }
       const data = {
-        id_usuario: user.value.id,
+        id_usuario: user.value.id_user,
         nombre: nombre.value,
         descripcion: descripcion.value,
         fecha_vencimiento: `${anio.value}-${mes.value}-${dia.value}T00:00:00.00`,

@@ -2,13 +2,13 @@
     <div class="fondo-login">
         <div class="contenedor-login">
                 <div class="div-login-form">
-                    <form @Submit.prevent="login">
+                    <form @submit.prevent="login">
                         <h1>Inicia sesión</h1>
                         <div class="div-inputs-login">
                             <label>Name</label>
-                            <input type="text" placeholder="Ej:Nombre Apellido" required>
+                            <input type="text" v-model = data.name placeholder="Ej:Nombre Apellido" required>
                             <label>Password</label>
-                            <input type="password" placeholder="Contraseña" required>
+                            <input type="password" v-model = data.password placeholder="Contraseña" required>
                             <p>¿No estas registrado? <router-link to="/register">Registrate</router-link></p>
                         </div>
                         <div class="div-button-login">
@@ -31,6 +31,8 @@ const router = useRouter();
 const data = ref({ name: '', password: '' });
 
 const login = async () => {
+
+    console.log('Data:', data.value);
     const response = await Login(data.value);
     console.log('Response:', response);
     if (response.status === 200) {
