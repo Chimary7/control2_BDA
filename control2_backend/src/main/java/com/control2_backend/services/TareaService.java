@@ -40,6 +40,27 @@ public class TareaService {
         return tareaRepository.findById(id);
     }
 
+    public ResponseEntity<Object> updateTarea(long id, TareaEntity updatedTarea) {
+        try {
+            TareaEntity existingTarea = tareaRepository.findById(id);
+
+            if (existingTarea == null) {
+                return new ResponseEntity<>("Tarea no encontrada", HttpStatus.NOT_FOUND);
+            }
+
+            existingTarea.setNombre(updatedTarea.getNombre());
+            existingTarea.setDescripcion(updatedTarea.getDescripcion());
+            existingTarea.setFecha_vencimiento(updatedTarea.getFecha_vencimiento());
+            existingTarea.setEstado(updatedTarea.getEstado());
+
+            tareaRepository.save(existingTarea);
+
+            return new ResponseEntity<>("Tarea actualizada correctamente", HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Error al actualizar la tarea: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     public ResponseEntity<Object> updateTareaToFinalizada(long id) {
         try {
             TareaEntity tarea = tareaRepository.findById(id);
