@@ -61,7 +61,7 @@ const EditarTarea = async () => {
     const data = {
       nombre: nombre.value,
       descripcion: descripcion.value,
-      fecha: `${anio.value}-${mes.value}-${dia.value}`,
+      fecha: `${anio.value}-${mes.value}-${dia.value}T00:00:00.000+00:00`,
       estado: false,
     }
     console.log(data)
