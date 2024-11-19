@@ -9,7 +9,7 @@
                             <input type="text" placeholder="Ej:Nombre Apellido" required>
                             <label>Password</label>
                             <input type="password" placeholder="Contraseña" required>
-                            <p>¿No estas registrado? <router-link to="/register">Registrate</Router-link></p>
+                            <p>¿No estas registrado? <router-link to="/register">Registrate</router-link></p>
                         </div>
                         <div class="div-button-login">
                             <button type="submit">Iniciar sesión</button>

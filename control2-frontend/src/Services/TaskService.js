@@ -51,6 +51,23 @@ export const getTasksByIdUser = async (id) => {
     }
 }
 
+export const getTaskById = async (id) => {
+    try{
+        const response = await httpClient.get(`/tarea/unico/${id}`);
+        return {data: response.data, status: response.status};
+
+    } catch (error) {
+        if(error.response){
+            console.log("error en respuesta del servidor: ", error.response.data);
+            return {data: error.response.data, status: error.response.status};
+        } else if(error.request){
+            console.log("no se recibe respuesta del servidor: ", error.request);
+        } else {
+            console.log("Error al enviar la petición: ", error.message);
+        }
+    }
+}
+
 export const deleteTask = async (id) => {
     try{
         const response = await httpClient.delete(`/tarea/${id}`);

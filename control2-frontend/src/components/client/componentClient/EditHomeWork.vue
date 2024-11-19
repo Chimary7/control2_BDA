@@ -3,8 +3,11 @@
   import {useRouter} from 'vue-router';
   import {updateTask} from "../../../Services/TaskService.js";
   import {deleteTask} from "../../../Services/TaskService.js";
+  import {getTaskById} from "../../../Services/TaskService.js";
 
   const router = useRouter();
+  const id_tarea = router.currentRoute.value.params.id;
+  const id_usuario = ref('')
   const anio = ref('')
   const mes = ref('')
   const dia = ref('')
@@ -13,22 +16,17 @@
   const idTarea = ref('')
 
 
-  onMounted(() => {
+  onMounted(async () => {
     // Se obtiene la tarea a editar
-    const tarea = TaskService.getTaskById();
-    const fecha = tarea.fecha.split('-')
+    const tarea = await getTaskById(id_tarea);
+    const fecha = tarea.fecha_vencimiento.split('T')[0].split('-')
     anio.value = fecha[0]
     mes.value = fecha[1]
     dia.value = fecha[2]
     nombre.value = tarea.nombre
     descripcion.value = tarea.descripcion
-    idTarea.value = tarea.id
-  }, [])
-
-  const volver = () => {
-    console.log('volver')
-    router.push({ name: 'homework' })
-  }
+    id_usuario.value = tarea.id_usuario
+  })
 
   const eliminar = () => {
     console.log('eliminar')
@@ -65,9 +63,11 @@
 
       // Se valida que el mes y el día sean válidos
       const data = {
+        id_tarea: id_tarea,
+        id_usuario: id_usuario.value,
         nombre: nombre.value,
         descripcion: descripcion.value,
-        fecha: `${anio.value}-${mes.value}-${dia.value}`,
+        fecha_vencimiento: `${anio.value}-${mes.value}-${dia.value}T00:00:00.00`,
         estado: false,
       }
       console.log(data)
@@ -112,7 +112,6 @@
       </div>
       <div>
         <button @click="eliminar" style="margin-top: 10px; background: #9216a8; width: 130px;">Eliminar</button>
-        <button @click="volver" style="margin-top: 10px; background: #9216a8; width: 130px; margin-left: 5px;">Volver</button>
         <button @click="EditarTarea" style="margin-top: 10px; background: #9216a8; margin-left: 5px;">Editar Tarea</button>
       </div>
 

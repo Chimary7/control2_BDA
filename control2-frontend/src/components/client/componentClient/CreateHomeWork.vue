@@ -1,19 +1,18 @@
 <script setup>
-  import { ref } from 'vue'
+  import { ref, computed } from 'vue'
   import {useRouter} from 'vue-router';
   import {createTask} from "../../../Services/TaskService.js";
+  import {useStore} from "vuex";
 
   const router = useRouter();
+  const store = useStore();
+  const user = computed(() => store.getters.getUser);
   const anio = ref('')
   const mes = ref('')
   const dia = ref('')
   const nombre = ref('')
   const descripcion = ref('')
 
-  const volver = () => {
-    console.log('volver')
-    router.push({ name: 'homework' })
-  }
   const crearTarea = async () => {
       console.log('crearTarea')
       if(nombre.value === '' || descripcion.value === '' || anio.value === '' || mes.value === '' || dia.value === ''){
@@ -43,9 +42,10 @@
         return
       }
       const data = {
+        id_usuario: user.value.id,
         nombre: nombre.value,
         descripcion: descripcion.value,
-        fecha: `${anio.value}-${mes.value}-${dia.value}`,
+        fecha_vencimiento: `${anio.value}-${mes.value}-${dia.value}T00:00:00.00`,
         estado: false,
       }
       console.log(data)
@@ -90,7 +90,6 @@
         <textarea class="text" v-model="descripcion" id="descripcion" placeholder="Estudiar Derivadas parciales en conjunto con direccionales"/>
       </div>
       <div>
-        <button @click="volver" style="margin-top: 10px; background: #9216a8; width: 130px;">Volver</button>
         <button @click="crearTarea" style="margin-top: 10px; background: #9216a8; margin-left: 5px;">Crear Tarea</button>
       </div>
 
