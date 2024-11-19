@@ -18,6 +18,7 @@ Para la ejecución de la base de datos, con el objetivo de modificar la base des
 
 Es necesario hacer la siguiente modificación dentro del archivo SecurityConfig.java
 —------------------------------------------------------------------------------------------------------------------------------------
+```java
 public class SecurityConfig {
     @Autowired
     private CorsConfigurationSource corsConfigurationSource;
@@ -46,7 +47,6 @@ Para hacer utilización del postman se adjuntan ejemplos en el link: https://img
 2. Hacer ingreso de los siguientes comandos:
 ```
 npm install
-npm install axios (instalar manualmente axios para asegurar su instalación)
 npm run dev 
 ```
 3.  Acceder al sitio web `http://localhost:5173/` 
