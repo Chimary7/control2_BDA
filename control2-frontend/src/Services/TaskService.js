@@ -36,7 +36,7 @@ export const updateTask = async (task) => {
 
 export const getTasksByIdUser = async (id) => {
     try{
-        const response = await httpClient.get(`/tarea/${id}`);
+        const response = await httpClient.get(`/usuario/${id}/tareas`);
         return {data: response.data, status: response.status};
 
     } catch (error) {
@@ -53,7 +53,7 @@ export const getTasksByIdUser = async (id) => {
 
 export const getTaskById = async (id) => {
     try{
-        const response = await httpClient.get(`/tarea/unico/${id}`);
+        const response = await httpClient.get(`/tarea/${id}`);
         return {data: response.data, status: response.status};
 
     } catch (error) {

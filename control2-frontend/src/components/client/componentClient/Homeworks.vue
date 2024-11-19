@@ -25,7 +25,7 @@
             >
                 <p>{{ task.nombre }}</p>
                 <p>{{ task.descripcion }}</p>
-                <p>Vencimiento: {{ task.fecha_de_vencimiento.split('T')[0] }}</p>
+                <p>Vencimiento: {{ formatFecha(task.fecha_vencimiento) }}</p>
                 <input 
                     type="checkbox" 
                     class="checkbox" 
@@ -52,6 +52,9 @@ const tasks = ref([]);
 
 const searchQuery = ref("");
 
+const formatFecha = (fecha) => {
+  return fecha ? fecha.split('T')[0] : '';
+};
 
 const filteredTasks = computed(() => {
     return tasks.value.filter(task =>
@@ -65,7 +68,8 @@ const toggleEstado = (index) => {
 };
 
 const getTasks = async () =>{
-    const response = await getTasksByIdUser(user.value.id);
+    console.log('User:', user.value.id_user);
+    const response = await getTasksByIdUser(user.value.id_user);
     if(response.status === 200){
         tasks.value = response.data;
     } else {
