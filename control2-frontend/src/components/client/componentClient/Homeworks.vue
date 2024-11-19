@@ -21,6 +21,7 @@
                 v-for="(task, index) in filteredTasks" 
                 :key="task.id" 
                 class="homework"
+                @Click="goViewTask(task.id)"
             >
                 <p>{{ task.nombre }}</p>
                 <p>{{ task.descripcion }}</p>
@@ -39,13 +40,15 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
+import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
+import {getTasksByIdUser} from '../../../Services/TaskService'
 
-
-const tasks = ref([
-    
-]);
-
+const store = useStore();
+const user = computed(() => store.getters.getUser);
+const router = useRouter();
+const tasks = ref([]);
 
 const searchQuery = ref("");
 
@@ -60,6 +63,25 @@ const filteredTasks = computed(() => {
 const toggleEstado = (index) => {
     tasks.value[index].estado = !tasks.value[index].estado;
 };
+
+const getTasks = async () =>{
+    const response = await getTasksByIdUser(user.value.id);
+    if(response.status === 200){
+        tasks.value = response.data;
+    } else {
+        alert("Error al caergar las tareas");
+    }
+}
+
+const goViewTask = (id) => {
+    console.log('Tarea: ' + id);
+    router.push({ name: 'ViewTask', params: { id:  id} });
+};
+
+onMounted(() => {
+    getTasks();
+});
+
 </script>
 
 <style scoped>
