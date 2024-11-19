@@ -53,3 +53,5 @@ npm run dev
 ```
 3.  Acceder al sitio web `http://localhost:5173/` 
 
+Observación: 
+Al iniciar sesión, el token utilizado por el usuario solo dura 10 minutos.
